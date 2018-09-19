@@ -15,7 +15,7 @@ class Classifier:
         self.__predictions = []
         self.__errors = []
     
-    def train(self, train_data, train_fact, epoch=100, hidden_layer=[0], output_layer=1, learning_rate=0.1):
+    def train(self, train_data, train_fact, epoch=100, learning_rate=0.1, hidden_layer=[0], output_layer=1):
         self.__train.data = train_data
         self.__train.fact = train_fact
         self.__data_sample = self.__train.data[0]
@@ -28,9 +28,12 @@ class Classifier:
         print('Training Finish')
 
     def plot(self):
-        plt.plot(self.__errors)
         plt.xlabel('Epoch')
         plt.ylabel('Error')
+        plt.xlim(1, len(self.__errors))
+        plt.ylim(0, max(self.__errors))
+        plt.plot(range(1,len(self.__errors) + 1), self.__errors)
+        plt.grid(True)
         plt.show()
 
     # def data_sample(self):
@@ -47,6 +50,9 @@ class Classifier:
 
     # def get_prediction(self):
     #     return self.__predictions
+
+    def get_errors(self):
+        return self.__errors
 
     def __training(self):
         for _ in range(self.__epoch):
@@ -157,7 +163,8 @@ def main():
     train.data, train.fact = read_data(file_path)
     # Classifier
     clf = Classifier()
-    clf.train(train.data, train.fact, epoch=50, hidden_layer=[2, 3, 2])
+    clf.train(train.data, train.fact, epoch=50, learning_rate=0.3, hidden_layer=[2, 3, 2])
+    print(clf.get_errors())
     clf.plot()
 
 if __name__ == "__main__":
