@@ -1,6 +1,5 @@
 import math
 import random
-import pandas as pd
 from matplotlib import pyplot as plt
 
 class Data:
@@ -35,21 +34,6 @@ class Classifier:
         plt.plot(range(1,len(self.__errors) + 1), self.__errors)
         plt.grid(True)
         plt.show()
-
-    # def data_sample(self):
-    #     return self.__data_sample
-
-    # def get_neurons(self):
-    #     return self.__neurons
-
-    # def get_weight(self):
-    #     return self.__weights
-
-    # def get_biases(self):
-    #     return self.__biases
-
-    # def get_prediction(self):
-    #     return self.__predictions
 
     def get_errors(self):
         return self.__errors
